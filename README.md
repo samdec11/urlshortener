@@ -17,3 +17,4 @@ An admin is able to log in and see the entire list of `Link`s that have been cre
 * You can create an admin user with `python manage.py createsuperuser`.
 * I have the DOMAIN constant in settings.py set to "http://localhost:8000". To run the local server with this configuration, run `python manage.py runserver localhost:8000`. In a browser, go to localhost:8000 to use the site.
 * You can also log in as the admin user you created at /admin to see the list of `Link`s in the database.
+* You can run tests with `python manage.py test urlshortener`.
