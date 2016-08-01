@@ -68,24 +68,6 @@ class LinkModelTests(TestCase):
         link = Link.objects.find_or_create(base)
         link.id.should_not.equal(None)
 
-    def test_find_by_short_url_with_existing_value(self):
-        """
-        `find_by_short_url` should remove the settings.DOMAIN from the beginning
-        of the string and search for a Link that matches the remaining string.
-        """
-        short = 'abc123'
-        link = Link.objects.create(base_url = Faker().uri(), short_string = short)
-        url_string = "%s%s" % (settings.DOMAIN, short)
-        Link.objects.find_by_short_url(url_string).id.should.equal(link.id)
-
-    def test_find_by_short_url_with_nonexistent_value(self):
-        """
-        `find_by_short_url` should return None if there is no Link that matches
-        the string.
-        """
-        url_string = "%sxyz098" % settings.DOMAIN
-        Link.objects.find_by_short_url(url_string).should.equal(None)
-
 class IndexViewTests(TestCase):
     def test_index_view_as_get(self):
         """

@@ -15,14 +15,6 @@ class LinkManager(models.Manager):
             link.save()
         return link
 
-    def find_by_short_url(self, short_url):
-        short_string = short_url.replace(settings.DOMAIN, "")
-        result = self.get_queryset().filter(short_string = short_string)
-        if result.exists():
-            return result.first()
-        else:
-            return None
-
 class Link(models.Model):
     base_url = models.CharField('Base URL', max_length=256, unique=True)
     short_string = models.CharField(max_length=30, unique=True)
