@@ -1,0 +1,27 @@
+body {
+  font-family: "Arial";
+  color: #2f2d0f;
+  background-color: #4989A8;
+  margin: 0;
+}
+
+a {
+  color: #f8a735;
+}
+
+.container {
+  width: 75%;
+  height: 80%;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #443d44;
+}
+
+.content {
+  width: 50%;
+  height: 80%;
+  padding-top: 50px;
+  margin: auto;
+  text-align: center;
+  background-color: #f8e7c7;
+}

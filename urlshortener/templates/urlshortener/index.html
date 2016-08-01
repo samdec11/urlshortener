@@ -1,17 +1,24 @@
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'urlshortener/style.css' %}" type="text/css" />
 
-<h1>URL Shortener</h1>
+<div class="container">
+  <div class="content">
+    <h1>URL Shortener</h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'urlshortener:index' %}" method="post">
-  {% csrf_token %}
-  <label for="url">Long URL</label>
-  <input type="text", name="url" />
-  <input type="submit" value="Shorten">
-</form>
+    <form action="{% url 'urlshortener:index' %}" method="post">
+      {% csrf_token %}
+      <label for="url">Enter long URL below</label>
+      <br />
+      <input type="text", name="url" />
+      <input type="submit" value="Shorten">
+    </form>
 
-{% if link %}
-  <p>The short URL for this link is <a href="{{ link.base_url }}" target="_blank">{{ link.short_url }}</a></p>
-{% endif %}
+    {% if link %}
+      <p>Long URL: {{ link.base_url }}</p>
+      <p>The short URL for this link is <a href="{{ link.base_url }}" target="_blank">{{ link.short_url }}</a></p>
+    {% endif %}
+  </div>
+</div>
+
