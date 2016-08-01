@@ -45,4 +45,3 @@ class Link(models.Model):
         while Link.objects.filter(short_string = rand_str).exists():
             rand_str = randomize()
         self.short_string = rand_str
-        return self.short_string

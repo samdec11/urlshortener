@@ -5,6 +5,7 @@ from faker import Faker
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from .models import Link, LinkManager
 
@@ -84,3 +85,36 @@ class LinkModelTests(TestCase):
         """
         url_string = "%sxyz098" % settings.DOMAIN
         Link.objects.find_by_short_url(url_string).should.equal(None)
+
+class IndexViewTests(TestCase):
+    def test_index_view_as_get(self):
+        """
+        The index should contain the "URL Shortener" header.
+        """
+        response = self.client.get(reverse('urlshortener:index'))
+        response.status_code.should.equal(200)
+        self.assertContains(response, 'URL Shortener')
+
+    def test_index_as_post(self):
+        """
+        There should be text displaying the short URL for the entry.
+        """
+        response = self.client.post(reverse('urlshortener:index'), {'url': Faker().uri()})
+        self.assertContains(response, 'The short URL for this link is')
+
+class RedirectViewTests(TestCase):
+    def test_redirect_view_with_unknown_short_url(self):
+        """
+        The redirect action should render a 404 when a Link is not found.
+        """
+        response = self.client.get(reverse('urlshortener:redirect', args=('bloop',)))
+        response.status_code.should.equal(404)
+
+    def test_redirect_view_with_known_short_url(self):
+        """
+        The redirect action should redirect to the base_url of the found Link.
+        """
+        link = Link.objects.find_or_create(base_url = Faker().uri())
+        response = self.client.get(reverse('urlshortener:redirect', args=(link.short_string,)))
+        response.status_code.should.equal(302)
+        response.url.should.equal(link.base_url)

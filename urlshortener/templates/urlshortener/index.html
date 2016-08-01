@@ -11,3 +11,7 @@
   <input type="text", name="url" />
   <input type="submit" value="Shorten">
 </form>
+
+{% if link %}
+  <p>The short URL for this link is <a href="{{ link.base_url }}" target="_blank">{{ link.short_url }}</a></p>
+{% endif %}
