@@ -12,6 +12,8 @@ An admin is able to log in and see the entire list of `Link`s that have been cre
 ### Running locally
 ###### This app was built using Django 1.9.8 and Python 3.5.2. Mac OSX provides support for Python 2 and 3, naming all Python 3 commands as `python3` and Python 2 as `python`. For the purposes of this documentation, I will say `python` in the places where I used `python3`.
 
+##### Packages Needed: [sure](https://github.com/gabrielfalcao/sure), [faker](https://github.com/joke2k/faker)
+
 * Clone the repo and `cd` into the directory.
 * I've checked the sqlite file into VC, so you shouldn't need to run migrations, but if you do, run `python manage.py migrate`.
 * You can create an admin user with `python manage.py createsuperuser`.
